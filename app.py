@@ -2,7 +2,7 @@ import matplotlib
 from matplotlib import font_manager, rcParams
 
 # 指定中文字型路徑（相對路徑）
-font_path = "fonts/NotoSansCJKtc-Regular.otf"
+font_path = "font/NotoSansCJKtc-Regular.otf"
 font_manager.fontManager.addfont(font_path)
 
 font_prop = font_manager.FontProperties(fname=font_path)
