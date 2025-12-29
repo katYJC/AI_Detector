@@ -1,11 +1,15 @@
-import matplotlib
+import os
+import urllib.request
 from matplotlib import font_manager, rcParams
 
-font_path = "font/NotoSansCJK-wght-400-900.ttf.ttc"
-font_manager.fontManager.addfont(font_path)
+FONT_URL = "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf"
+FONT_PATH = "NotoSansCJKtc-Regular.otf"
 
-font_prop = font_manager.FontProperties(fname=font_path)
-rcParams["font.family"] = font_prop.get_name()
+if not os.path.exists(FONT_PATH):
+    urllib.request.urlretrieve(FONT_URL, FONT_PATH)
+
+font_manager.fontManager.addfont(FONT_PATH)
+rcParams["font.family"] = font_manager.FontProperties(fname=FONT_PATH).get_name()
 rcParams["axes.unicode_minus"] = False
 
 import streamlit as st
