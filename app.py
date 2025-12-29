@@ -1,3 +1,15 @@
+import matplotlib
+from matplotlib import font_manager, rcParams
+
+# 指定中文字型路徑（相對路徑）
+font_path = "fonts/NotoSansCJKtc-Regular.otf"
+font_manager.fontManager.addfont(font_path)
+
+font_prop = font_manager.FontProperties(fname=font_path)
+
+rcParams["font.family"] = font_prop.get_name()
+rcParams["axes.unicode_minus"] = False  # 解決負號顯示成方塊
+
 import streamlit as st
 import numpy as np
 import pandas as pd
