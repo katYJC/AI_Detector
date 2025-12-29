@@ -10,6 +10,16 @@ st.title("🧠 AI vs Human 文章偵測器")
 
 model = train_model()
 
+model, lm = train_model()
+
+# 使用者輸入
+ppl = lm.perplexity(text)
+burst = burstiness(text)
+
+features = np.array(
+    extract_features(text) + [ppl, burst]
+).reshape(1, -1)
+
 # --- Optional: read training data for reference stats (if exists) ---
 @st.cache_data
 def load_train_stats():
@@ -96,3 +106,11 @@ if st.button("開始判斷"):
             st.pyplot(fig2)
         else:
             st.info("找不到 sample_data.csv 或格式有誤：已略過訓練資料平均值對照圖。")
+st.subheader("🧠 語言風格指標")
+
+st.metric("Perplexity（困惑度）", f"{ppl:.2f}",
+          help="越高代表越難預測，較像人類")
+
+st.metric("Burstiness（句長變化）", f"{burst:.2f}",
+          help="句長變化越大，越偏人類")
+
